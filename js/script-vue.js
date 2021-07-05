@@ -33,13 +33,13 @@ new Vue(
             }
         },
 
-        /*
-        Creazione di un nuovo messaggio
-        Con un click su “CREA” viene pushato un nuovo post nell’array posts, 
-        con il testo della textarea.
-        */
         methods: {
-            addPost :function(){
+            /*
+            Creazione di un nuovo messaggio
+            Con un click su “CREA” viene pushato un nuovo post nell’array posts, 
+            con il testo della textarea.
+            */
+            addPost: function () {
                 this.myProfile.posts.push({
                     text: this.newPost,
                     date: this.getCurrentDate(),
@@ -50,6 +50,14 @@ new Vue(
             getCurrentDate: function () {
                 const dateTimeNow = dayjs();
                 return dateTimeNow.format('DD/MM/YYYY')
+            },
+
+            /*
+            Cancellazione del post.
+            Aggiungere un icona ad ogni post, che se cliccata cancella il post relativo.
+            */
+            deleteMessage: function (index) {
+                this.myProfile.posts.splice(index, 1)
             },
         }
     }
