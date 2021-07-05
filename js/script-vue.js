@@ -4,6 +4,7 @@ new Vue(
     {
         el: '#profile-page',
         data: {
+            newPost: '',
             myProfile: {
                 details: {
                     name: 'Pierfilippo',
@@ -31,5 +32,25 @@ new Vue(
                 ]
             }
         },
+
+        /*
+        Creazione di un nuovo messaggio
+        Con un click su “CREA” viene pushato un nuovo post nell’array posts, 
+        con il testo della textarea.
+        */
+        methods: {
+            addPost :function(){
+                this.myProfile.posts.push({
+                    text: this.newPost,
+                    date: this.getCurrentDate(),
+                });
+                this.newPost = '';
+
+            },
+            getCurrentDate: function () {
+                const dateTimeNow = dayjs();
+                return dateTimeNow.format('DD/MM/YYYY')
+            },
+        }
     }
 );

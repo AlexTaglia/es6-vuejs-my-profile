@@ -73,14 +73,39 @@ data.myProfile.posts.forEach((post) => {
     postListHtml.innerHTML += `<div class="post"> ${postHtml} </div>`
 })
 
-// Aggiungere post nell'array
-function pushNewText() {
-    let newText = document.querySelector('.textInput').value;
+const btnInput = document.querySelector('.send');
 
+
+/*
+Creazione di un nuovo messaggio
+Con un click su “CREA” viene pushato un nuovo post nell’array posts, 
+con il testo della textarea.
+*/
+
+btnInput.addEventListener("click", function () {
+    const dateTimeNow = dayjs();
+    let newText = document.querySelector('.textInput').value;
+    
     data.myProfile.posts.push({
         text: newText,
-        date: '05-07-2021'
+        date: dateTimeNow.format("DD-MM-YYYY"),
     });
 
+    let newPostHtml = `
+    <div class="post-details"> 
+        <div class="user-pic">
+            <img src="${data.myProfile.details.pic}" alt="user pic">
+        </div>
+        <div class="details">
+            <div class="user-name">${data.myProfile.details.name} ${data.myProfile.details.surname}</div>
+            <div class="post-date">${dateTimeNow.format("DD-MM-YYYY")}</div>
+        </div>
+    </div> 
+    <div class="post-text">
+        ${newText}
+    </div>
+    `
+    postListHtml.innerHTML += `<div class="post"> ${newPostHtml} </div>`
+
     newText = document.querySelector('.textInput').value = '';
-}
+})

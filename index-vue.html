@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Social Profile</title>
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,13 +25,13 @@
         </div>
 
         <div class="new-post">
-            <textarea placeholder="A cosa stai pensando?"></textarea>
-            <button class="send">CREA</button>
+            <textarea v-model="newPost" placeholder="A cosa stai pensando?"></textarea>
+            <button @click="addPost()" class="send">CREA</button>
         </div>
 
         <div class="post-list">
 
-            <div v-for = 'post in myProfile.posts' class="post">
+            <div v-for = "post in myProfile.posts" class="post">
                 <div class="post-details">
                     <div class="user-pic">
                         <img :src="myProfile.details.pic" alt="user pic">
@@ -46,7 +47,7 @@
 
                 <!-- if? -->
                 <div v-if = "Object.keys(post).includes('mediaPath')" class="post-media">
-                    <img :src='post.mediaPath' alt="media" />
+                    <img :src="post.mediaPath" alt="media" />
                 </div>
 
             </div>
